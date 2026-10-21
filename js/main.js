@@ -36,3 +36,29 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   carousel.querySelector('[data-prev]').addEventListener('click', () => show(current - 1));
   carousel.querySelector('[data-next]').addEventListener('click', () => show(current + 1));
 });
+
+/* Sonner-inspired toast, shown only after an explicit share action. */
+const shareConcept = document.querySelector('[data-share-concept]');
+const toastRegion = document.querySelector('[data-toast-region]');
+let toastTimeout;
+function showToast(message) {
+  if (!toastRegion) return;
+  clearTimeout(toastTimeout);
+  const toast = document.createElement('div');
+  toast.className = 'toast-message';
+  toast.textContent = message;
+  toastRegion.replaceChildren(toast);
+  toastTimeout = setTimeout(() => toastRegion.replaceChildren(), 3500);
+}
+if (shareConcept) {
+  shareConcept.addEventListener('click', async () => {
+    const link = window.location.origin + window.location.pathname + '#showcase';
+    try {
+      if (!navigator.clipboard || !window.isSecureContext) throw new Error('clipboard unavailable');
+      await navigator.clipboard.writeText(link);
+      showToast('Tautan konsep berhasil disalin.');
+    } catch {
+      showToast('Tidak dapat menyalin otomatis. Salin alamat halaman dari browser.');
+    }
+  });
+}
