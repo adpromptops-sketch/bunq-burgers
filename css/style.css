@@ -73,3 +73,15 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:28px clamp(22
   .section{padding-inline:20px}
   .section h2{font-size:11vw}
 }
+
+/* V1.4 interactive editorial: magnetic CTA, sliding arrow and underline reveal. */
+.site-header nav a{position:relative}
+.site-header nav a::after{content:"";position:absolute;bottom:5px;left:0;right:0;height:2px;background:var(--mustard);transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
+.site-header nav a:hover::after,.site-header nav a:focus-visible::after{transform:scaleX(1)}
+.magnetic-button{--magnetic-x:0px;--magnetic-y:0px;gap:14px;position:relative;transform:translate3d(var(--magnetic-x),var(--magnetic-y),0);transition:transform .2s ease,background-color .2s ease,box-shadow .2s ease;will-change:transform}
+.magnetic-button:hover{background:#ffc652;box-shadow:0 8px 20px rgba(104,29,39,.13);filter:none}
+.button-arrow{font-size:1.35em;line-height:1;display:inline-block;transition:transform .22s ease}
+.magnetic-button:hover .button-arrow,.magnetic-button:focus-visible .button-arrow{transform:translate(4px,-3px)}
+.magnetic-button:active{scale:.97}
+@media(hover:none),(pointer:coarse){.magnetic-button{transform:none!important;will-change:auto}.magnetic-button:active{scale:.97}}
+@media(prefers-reduced-motion:reduce){.magnetic-button,.button-arrow,.site-header nav a::after{transition:none!important}.magnetic-button{transform:none!important;will-change:auto}}

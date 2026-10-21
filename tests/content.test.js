@@ -10,3 +10,9 @@ test('no fabricated ordering button', () => assert.doesNotMatch(html, /href="htt
 test('spotlight has no oversized photo placeholder', () => assert.doesNotMatch(html, /class="photo-placeholder"/));
 test('concept burger image remains present', () => assert.ok(html.includes('assets/burger-concept.webp')));
 test('spotlight retains accurate concept disclaimer', () => assert.match(html, /Foto dan informasi produk resmi menunggu konfirmasi pemilik/));
+
+test('hero CTA keeps the concept anchor and sliding arrow', () => {
+  assert.match(html, /class="button magnetic-button" href="#showcase"/);
+  assert.match(html, /class="button-arrow" aria-hidden="true"/);
+});
+test('navigation remains semantic anchor links', () => assert.match(html, /<nav aria-label="Navigasi utama">/));
