@@ -16,3 +16,18 @@ test('hero CTA keeps the concept anchor and sliding arrow', () => {
   assert.match(html, /class="button-arrow" aria-hidden="true"/);
 });
 test('navigation remains semantic anchor links', () => assert.match(html, /<nav aria-label="Navigasi utama">/));
+
+test('carousel has manual navigation and three concept-only slides', () => {
+  assert.match(html, /data-carousel/);
+  assert.match(html, /data-prev/);
+  assert.match(html, /data-next/);
+  assert.equal((html.match(/data-slide/g) || []).length, 3);
+});
+test('menu expands without invented products or checkout', () => {
+  assert.match(html, /<details class="menu-details">/);
+  assert.match(html, /Belum ada fitur pemesanan/);
+});
+test('story includes accessible step indicator', () => {
+  assert.match(html, /class="story-steps"/);
+  assert.match(html, /aria-current="step"/);
+});
