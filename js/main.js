@@ -22,3 +22,17 @@ if (magneticButton) {
   reducedMotion.addEventListener('change', reset);
   finePointer.addEventListener('change', reset);
 }
+
+/* Modular editorial carousel: manual controls, no auto-play or tracking. */
+document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+  const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
+  const status = carousel.querySelector('[data-carousel-status]');
+  let current = 0;
+  const show = (index) => {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => { slide.hidden = i !== current; });
+    status.textContent = (current + 1) + ' / ' + slides.length;
+  };
+  carousel.querySelector('[data-prev]').addEventListener('click', () => show(current - 1));
+  carousel.querySelector('[data-next]').addEventListener('click', () => show(current + 1));
+});
