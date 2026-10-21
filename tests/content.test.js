@@ -31,3 +31,9 @@ test('story includes accessible step indicator', () => {
   assert.match(html, /class="story-steps"/);
   assert.match(html, /aria-current="step"/);
 });
+
+test('share action and accessible toast region exist', () => {
+  assert.match(html, /data-share-concept/);
+  assert.match(html, /data-toast-region/);
+  assert.match(html, /role="status" aria-live="polite"/);
+});
